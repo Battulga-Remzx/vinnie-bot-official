@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VINNIE BOT - Профайл</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="VINNIE BOT">
+                <h2>VINNIE BOT</h2>
+            </div>
+            
+            <div class="user-info" id="userInfo">
+                <div class="user-avatar">
+                    <img id="userAvatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%;">
+                </div>
+                <div class="user-details">
+                    <span class="user-name" id="userName">Ачааллаж байна...</span>
+                    <span class="user-id" id="userId"></span>
+                </div>
+                <div class="user-menu">
+                    <button class="user-menu-btn" id="userMenuBtn">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="/profile"><i class="fas fa-user"></i> Профайл</a>  <!-- Edit Account-ийг Profile-р сольсон -->
+                        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Гарах</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="balance-cards">
+                <div class="balance-card">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <div>
+                        <span class="balance-label">Мөнгө</span>
+                        <span class="balance-amount" id="money">0</span>
+                    </div>
+                </div>
+                <div class="balance-card">
+                    <i class="fas fa-piggy-bank"></i>
+                    <div>
+                        <span class="balance-label">Банк</span>
+                        <span class="balance-amount" id="bank">0</span>
+                    </div>
+                </div>
+                <div class="balance-card">
+                    <i class="fas fa-coins"></i>
+                    <div>
+                        <span class="balance-label">Зоос</span>
+                        <span class="balance-amount" id="coin">0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="coin-price">
+                <i class="fas fa-chart-line"></i>
+                <span>1 COIN = </span>
+                <span id="coinPrice">3000</span>
+                <span>💰</span>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="/">
+                        <i class="fas fa-home"></i>
+                        <span>Нүүр</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/game">
+                        <i class="fas fa-dice"></i>
+                        <span>Тоглоом</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/shop">
+                        <i class="fas fa-store"></i>
+                        <span>Дэлгүүр</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/inventory">
+                        <i class="fas fa-box"></i>
+                        <span>Агуулах</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/coinchart">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Coin график</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/leaderboard">
+                        <i class="fas fa-trophy"></i>
+                        <span>Лидерборд</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="profile-container">
+                <div class="profile-header">
+                    <div class="profile-avatar-container">
+                        <img id="profileAvatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Profile Avatar" class="profile-avatar-large">
+                        <div class="profile-status" id="profileStatus">
+                            <i class="fas fa-circle"></i>
+                        </div>
+                    </div>
+                    <div class="profile-title">
+                        <h1 id="profileUsername">Хэрэглэгч</h1>
+                        <p id="profileDiscordTag">#0000</p>
+                    </div>
+                    <div class="profile-rank">
+                        <span class="rank-badge" id="profileRank">#1</span>
+                        <span class="rank-label">Зэрэглэл</span>
+                    </div>
+                </div>
+                
+                <div class="profile-stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-details">
+                            <span class="stat-label">Мөнгө</span>
+                            <span class="stat-value" id="profileMoney">0</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🏦</div>
+                        <div class="stat-details">
+                            <span class="stat-label">Банк</span>
+                            <span class="stat-value" id="profileBank">0</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🪙</div>
+                        <div class="stat-details">
+                            <span class="stat-label">Зоос</span>
+                            <span class="stat-value" id="profileCoin">0</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💼</div>
+                        <div class="stat-details">
+                            <span class="stat-label">Ажил</span>
+                            <span class="stat-value" id="profileJob">Ажилгүй</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="profile-details">
+                    <h2><i class="fas fa-box"></i> Агуулах</h2>
+                    <div class="inventory-grid">
+                        <div class="inventory-item">
+                            <span class="item-emoji">⬛</span>
+                            <span class="item-name">Нүүрс</span>
+                            <span class="item-count" id="profileCoal">0</span>
+                        </div>
+                        <div class="inventory-item">
+                            <span class="item-emoji">⛓️</span>
+                            <span class="item-name">Төмөр</span>
+                            <span class="item-count" id="profileIron">0</span>
+                        </div>
+                        <div class="inventory-item">
+                            <span class="item-emoji">🪙</span>
+                            <span class="item-name">Алт</span>
+                            <span class="item-count" id="profileGold">0</span>
+                        </div>
+                        <div class="inventory-item">
+                            <span class="item-emoji">💎</span>
+                            <span class="item-name">Алмааз</span>
+                            <span class="item-count" id="profileDiamond">0</span>
+                        </div>
+                        <div class="inventory-item">
+                            <span class="item-emoji">⚛️</span>
+                            <span class="item-name">Антиматтер</span>
+                            <span class="item-count" id="profileAntimatter">0</span>
+                        </div>
+                        <div class="inventory-item">
+                            <span class="item-emoji">🔧</span>
+                            <span class="item-name">Багаж</span>
+                            <span class="item-count" id="profileTools">0</span>
+                        </div>
+                        <div class="inventory-item">
+                            <span class="item-emoji">🔑</span>
+                            <span class="item-name">Түлхүүр</span>
+                            <span class="item-count" id="profileKeys">0</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="profile-details">
+                    <h2><i class="fas fa-tools"></i> Ажлын багажууд</h2>
+                    <div class="tools-grid">
+                        <div class="tool-item" id="toolMiner">
+                            <span class="tool-emoji">⛏️</span>
+                            <span class="tool-name">Уурхайчин</span>
+                            <span class="tool-status">❌ Эзэмшээгүй</span>
+                        </div>
+                        <div class="tool-item" id="toolDoctor">
+                            <span class="tool-emoji">💊</span>
+                            <span class="tool-name">Эмч</span>
+                            <span class="tool-status">❌ Эзэмшээгүй</span>
+                        </div>
+                        <div class="tool-item" id="toolPolice">
+                            <span class="tool-emoji">👮</span>
+                            <span class="tool-name">Цагдаа</span>
+                            <span class="tool-status">❌ Эзэмшээгүй</span>
+                        </div>
+                        <div class="tool-item" id="toolGang">
+                            <span class="tool-emoji">🔫</span>
+                            <span class="tool-name">Бүлэглэл</span>
+                            <span class="tool-status">❌ Эзэмшээгүй</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="profile-actions">
+                    <button class="btn btn-primary" id="refreshProfileBtn">
+                        <i class="fas fa-sync-alt"></i> Шинэчлэх
+                    </button>
+                    <button class="btn btn-secondary" id="backToHomeBtn">
+                        <i class="fas fa-home"></i> Нүүр
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/profile.js"></script>
+</body>
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VINNIE BOT - Дэлгүүр</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/shop.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="VINNIE BOT">
+                <h2>VINNIE BOT</h2>
+            </div>
+            
+            <div class="user-info" id="userInfo">
+                <div class="user-avatar">
+                    <img id="userAvatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%;">
+                </div>
+                <div class="user-details">
+                    <span class="user-name" id="userName">Зочны хэрэглэгч</span>
+                    <span class="user-id" id="userId"></span>
+                </div>
+                <div class="user-menu">
+                    <button class="user-menu-btn" id="userMenuBtn">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="/profile"><i class="fas fa-user"></i> Профайл</a>  <!-- Edit Account-ийг Profile-р сольсон -->
+                        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Гарах</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="balance-cards">
+                <div class="balance-card">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <div>
+                        <span class="balance-label">Мөнгө</span>
+                        <span class="balance-amount" id="money">0</span>
+                    </div>
+                </div>
+                <div class="balance-card">
+                    <i class="fas fa-piggy-bank"></i>
+                    <div>
+                        <span class="balance-label">Банк</span>
+                        <span class="balance-amount" id="bank">0</span>
+                    </div>
+                </div>
+                <div class="balance-card">
+                    <i class="fas fa-coins"></i>
+                    <div>
+                        <span class="balance-label">Зоос</span>
+                        <span class="balance-amount" id="coin">0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="coin-price">
+                <i class="fas fa-chart-line"></i>
+                <span>1 COIN = </span>
+                <span id="coinPrice">3000</span>
+                <span>💰</span>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="/">
+                        <i class="fas fa-home"></i>
+                        <span>Нүүр</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/game">
+                        <i class="fas fa-dice"></i>
+                        <span>Тоглоом</span>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a href="/shop">
+                        <i class="fas fa-store"></i>
+                        <span>Дэлгүүр</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/inventory">
+                        <i class="fas fa-box"></i>
+                        <span>Агуулах</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/coinchart">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Coin график</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/leaderboard">
+                        <i class="fas fa-trophy"></i>
+                        <span>Лидерборд</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="auth-section" id="authSection">
+                <input type="text" id="userIdInput" placeholder="Discord ID-ээ оруулна уу" class="user-id-input">
+                <button id="loginBtn" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i> Нэвтрэх
+                </button>
+            </div>
+        </nav>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>🛒 ДЭЛГҮҮР</h1>
+            
+            <div class="shop-categories">
+                <button class="category-btn active" data-category="coins">🪙 Зоос</button>
+                <button class="category-btn" data-category="tools">⛏️ Ажлын багц</button>
+                <button class="category-btn" data-category="items">🔧 Хэрэгсэл</button>
+                <button class="category-btn" data-category="resources">💎 Үнэт эдлэл</button>
+                <button class="category-btn" data-category="special">🎫 Тусгай</button>
+            </div>
+            
+            <!-- Зоосны категори -->
+            <div id="category-coins" class="category-content active">
+                <h2>🪙 ЗООС</h2>
+                <div class="items-grid">
+                    <div class="shop-item" data-type="coin" data-amount="1" data-price="3000">
+                        <div class="item-emoji">🪙</div>
+                        <div class="item-name">1 Coin</div>
+                        <div class="item-price"><span class="coin-price-display" data-amount="1">3,000</span> 💰</div>
+                        <button class="buy-btn" data-item="coin1">Худалдан авах</button>
+                    </div>
+                    <div class="shop-item" data-type="coin" data-amount="10" data-price="30000">
+                        <div class="item-emoji">🪙</div>
+                        <div class="item-name">10 Coin</div>
+                        <div class="item-price"><span class="coin-price-display" data-amount="10">30,000</span> 💰</div>
+                        <button class="buy-btn" data-item="coin10">Худалдан авах</button>
+                    </div>
+                    <div class="shop-item" data-type="coin" data-amount="100" data-price="300000">
+                        <div class="item-emoji">🪙</div>
+                        <div class="item-name">100 Coin</div>
+                        <div class="item-price"><span class="coin-price-display" data-amount="100">300,000</span> 💰</div>
+                        <button class="buy-btn" data-item="coin100">Худалдан авах</button>
+                    </div>
+                    <div class="shop-item" data-type="coin" data-amount="1000" data-price="3000000">
+                        <div class="item-emoji">🪙</div>
+                        <div class="item-name">1000 Coin</div>
+                        <div class="item-price"><span class="coin-price-display" data-amount="1000">3,000,000</span> 💰</div>
+                        <button class="buy-btn" data-item="coin1000">Худалдан авах</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Ажлын багцын категори -->
+            <div id="category-tools" class="category-content">
+                <h2>⛏️ АЖЛЫН БАГЦ</h2>
+                <div class="items-grid">
+                    <div class="shop-item" data-type="tool" data-role="miner" data-price="5000">
+                        <div class="item-emoji">⛏️</div>
+                        <div class="item-name">Уурхайн хүрз</div>
+                        <div class="item-desc">Уурхайчны ажлын үр ашиг +10%</div>
+                        <div class="item-price">5,000 💰</div>
+                        <button class="buy-btn" data-item="tool_miner">Худалдан авах</button>
+                    </div>
+                    <div class="shop-item" data-type="tool" data-role="doctor" data-price="5000">
+                        <div class="item-emoji">💊</div>
+                        <div class="item-name">Эмчийн хэрэгсэл</div>
+                        <div class="item-desc">Эмчийн ажлын үр ашиг +10%</div>
+                        <div class="item-price">5,000 💰</div>
+                        <button class="buy-btn" data-item="tool_doctor">Худалдан авах</button>
+                    </div>
+                    <div class="shop-item" data-type="tool" data-role="police" data-price="5000">
+                        <div class="item-emoji">👮</div>
+                        <div class="item-name">Цагдаагийн тэмдэг</div>
+                        <div class="item-desc">Цагдаагийн ажлын үр ашиг +10%</div>
+                        <div class="item-price">5,000 💰</div>
+                        <button class="buy-btn" data-item="tool_police">Худалдан авах</button>
+                    </div>
+                    <div class="shop-item" data-type="tool" data-role="gang" data-price="10000">
+                        <div class="item-emoji">🔫</div>
+                        <div class="item-name">Бүлэглэлийн зэвсэг</div>
+                        <div class="item-desc">Бүлэглэлийн дээрэм +10%</div>
+                        <div class="item-price">10,000 💰</div>
+                        <button class="buy-btn" data-item="tool_gang">Худалдан авах</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Хэрэгслийн категори -->
+            <div id="category-items" class="category-content">
+                <h2>🔧 ХЭРЭГСЭЛ</h2>
+                <div class="items-grid">
+                    <div class="shop-item" data-type="item" data-key="tool" data-price="50">
+                        <div class="item-emoji">🔧</div>
+                        <div class="item-name">Багаж</div>
+                        <div class="item-desc">Дээрэм хийхэд хэрэглэнэ</div>
+                        <div class="item-price">50 💰</div>
+                        <button class="buy-btn" data-item="item_tool">Худалдан авах</button>
+                    </div>
+                    <div class="shop-item" data-type="item" data-key="key" data-price="200">
+                        <div class="item-emoji">🔑</div>
+                        <div class="item-name">Түлхүүр</div>
+                        <div class="item-desc">Чухал хаалга нээхэд хэрэглэнэ</div>
+                        <div class="item-price">200 💰</div>
+                        <button class="buy-btn" data-item="item_key">Худалдан авах</button>
+                    </div>
+                    <div class="shop-item" data-type="item" data-key="detector" data-price="5000">
+                        <div class="item-emoji">📡</div>
+                        <div class="item-name">Эрдэс илрүүлэгч</div>
+                        <div class="item-desc">Уурхайчны олборлолт +20%</div>
+                        <div class="item-price">5,000 💰</div>
+                        <button class="buy-btn" data-item="item_detector">Худалдан авах</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Үнэт эдлэлийн категори -->
+            <div id="category-resources" class="category-content">
+                <h2>💎 ҮНЭТ ЭДЛЭЛ</h2>
+                <div class="items-grid">
+                    <div class="shop-item" data-type="resource" data-key="diamond" data-price="100000">
+                        <div class="item-emoji">💎</div>
+                        <div class="item-name">Алмааз</div>
+                        <div class="item-price">100,000 💰</div>
+                        <button class="buy-btn" data-item="resource_diamond">Худалдан авах</button>
+                    </div>
+                    <div class="shop-item" data-type="resource" data-key="gold" data-price="50000">
+                        <div class="item-emoji">🪙</div>
+                        <div class="item-name">Алт</div>
+                        <div class="item-price">50,000 💰</div>
+                        <button class="buy-btn" data-item="resource_gold">Худалдан авах</button>
+                    </div>
+                    <div class="shop-item" data-type="resource" data-key="iron" data-price="10000">
+                        <div class="item-emoji">⛓️</div>
+                        <div class="item-name">Төмөр</div>
+                        <div class="item-price">10,000 💰</div>
+                        <button class="buy-btn" data-item="resource_iron">Худалдан авах</button>
+                    </div>
+                    <div class="shop-item" data-type="resource" data-key="coal" data-price="5000">
+                        <div class="item-emoji">⬛</div>
+                        <div class="item-name">Нүүрс</div>
+                        <div class="item-price">5,000 💰</div>
+                        <button class="buy-btn" data-item="resource_coal">Худалдан авах</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Тусгай категори -->
+            <div id="category-special" class="category-content">
+                <h2>🎫 ТУСГАЙ</h2>
+                <div class="items-grid">
+                    <div class="shop-item" data-type="special" data-key="lottery" data-price="5000">
+                        <div class="item-emoji">🎫</div>
+                        <div class="item-name">Аз жаргалын билет</div>
+                        <div class="item-desc">Супер шагнал хожих боломж</div>
+                        <div class="item-price">5,000 💰</div>
+                        <button class="buy-btn" data-item="special_lottery">Худалдан авах</button>
+                    </div>
+                    <div class="shop-item" data-type="special" data-key="boost" data-price="20000">
+                        <div class="item-emoji">✨</div>
+                        <div class="item-name">Давхар ашиг</div>
+                        <div class="item-desc">Дараагийн ажлаас 2 дахин их мөнгө</div>
+                        <div class="item-price">20,000 💰</div>
+                        <button class="buy-btn" data-item="special_boost">Худалдан авах</button>
+                    </div>
+                    <div class="shop-item" data-type="special" data-key="vip" data-price="50000">
+                        <div class="item-emoji">💳</div>
+                        <div class="item-name">VIP карт</div>
+                        <div class="item-desc">Бүх ажлын үр ашиг +20% (7 хоног)</div>
+                        <div class="item-price">50,000 💰</div>
+                        <button class="buy-btn" data-item="special_vip">Худалдан авах</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sell-section">
+                <h2>💰 ЗАРАХ</h2>
+                <div class="sell-grid">
+                    <div class="sell-item">
+                        <h4>Зоос зарах</h4>
+                        <input type="number" id="sellCoinAmount" placeholder="Тоо" min="1">
+                        <button id="sellCoinBtn" class="sell-btn">Зарах</button>
+                        <p class="sell-price">1 Coin = <span id="coinSellPrice">3000</span> 💰</p>
+                    </div>
+                    <div class="sell-item">
+                        <h4>Нүүрс зарах</h4>
+                        <input type="number" id="sellCoalAmount" placeholder="Тоо" min="1">
+                        <button id="sellCoalBtn" class="sell-btn">Зарах</button>
+                        <p class="sell-price">1 ширхэг = 50 💰</p>
+                    </div>
+                    <div class="sell-item">
+                        <h4>Төмөр зарах</h4>
+                        <input type="number" id="sellIronAmount" placeholder="Тоо" min="1">
+                        <button id="sellIronBtn" class="sell-btn">Зарах</button>
+                        <p class="sell-price">1 ширхэг = 200 💰</p>
+                    </div>
+                    <div class="sell-item">
+                        <h4>Алт зарах</h4>
+                        <input type="number" id="sellGoldAmount" placeholder="Тоо" min="1">
+                        <button id="sellGoldBtn" class="sell-btn">Зарах</button>
+                        <p class="sell-price">1 ширхэг = 1,000 💰</p>
+                    </div>
+                    <div class="sell-item">
+                        <h4>Алмааз зарах</h4>
+                        <input type="number" id="sellDiamondAmount" placeholder="Тоо" min="1">
+                        <button id="sellDiamondBtn" class="sell-btn">Зарах</button>
+                        <p class="sell-price">1 ширхэг = 5,000 💰</p>
+                    </div>
+                    <div class="sell-item">
+                        <h4>Антиматтер зарах</h4>
+                        <input type="number" id="sellAntimatterAmount" placeholder="Тоо" min="1">
+                        <button id="sellAntimatterBtn" class="sell-btn">Зарах</button>
+                        <p class="sell-price">1 ширхэг = 50,000 💰</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/shop.js"></script>
+</body>
+</html>

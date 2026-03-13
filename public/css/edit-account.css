@@ -1,0 +1,124 @@
+/* public/css/edit-account.css */
+
+.edit-account-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.edit-account-container h1 {
+    color: #ffd369;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 2rem;
+}
+
+.account-card {
+    background: rgba(15, 52, 96, 0.7);
+    border-radius: 20px;
+    padding: 30px;
+    border: 1px solid rgba(78, 204, 163, 0.3);
+    backdrop-filter: blur(5px);
+}
+
+.account-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid #4ecca3;
+    margin-bottom: 15px;
+}
+
+.account-header h2 {
+    color: #ffd369;
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.account-header p {
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+.account-body {
+    margin-bottom: 30px;
+}
+
+.info-row {
+    display: flex;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    width: 120px;
+    color: #aaa;
+    font-weight: bold;
+}
+
+.info-value {
+    flex: 1;
+    color: #fff;
+}
+
+.account-actions {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #4ecca3, #2c7865);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(78, 204, 163, 0.4);
+}
+
+.btn-danger {
+    background: linear-gradient(45deg, #ed4245, #b0302a);
+    color: white;
+}
+
+.btn-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(237, 66, 69, 0.4);
+}
+
+.account-footer {
+    text-align: center;
+    color: #aaa;
+    font-size: 0.85rem;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}

@@ -1,0 +1,16 @@
+{
+  "users": {},
+  "system": {
+    "coinPrice": {
+      "current": 3000,
+      "previous": 3000,
+      "lastUpdated": 1773121360031
+    },
+    "stats": {
+      "totalUsers": 0,
+      "totalMoney": 0,
+      "totalCoins": 0,
+      "totalCommands": 0
+    }
+  }
+}

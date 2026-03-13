@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VINNIE BOT - Вэб тоглоом</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="VINNIE BOT">
+                <h2>VINNIE BOT</h2>
+            </div>
+            
+            <!-- index.html - user-info хэсгийг доорх крор солино -->
+            <div class="user-info" id="userInfo">
+                <div class="user-avatar">
+                    <img id="userAvatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%;">
+                </div>
+                <div class="user-details">
+                    <span class="user-name" id="userName">Зочны хэрэглэгч</span>
+                    <span class="user-id" id="userId"></span>
+                </div>
+                <div class="user-menu">
+                    <button class="user-menu-btn" id="userMenuBtn">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="/profile"><i class="fas fa-user"></i> Профайл</a>  <!-- Edit Account-ийг Profile-р сольсон -->
+                        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Гарах</a>
+                    </div>
+                </div>
+            </div>
+            <div class="balance-cards">
+                <div class="balance-card">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <div>
+                        <span class="balance-label">Мөнгө</span>
+                        <span class="balance-amount" id="money">0</span>
+                    </div>
+                </div>
+                <div class="balance-card">
+                    <i class="fas fa-piggy-bank"></i>
+                    <div>
+                        <span class="balance-label">Банк</span>
+                        <span class="balance-amount" id="bank">0</span>
+                    </div>
+                </div>
+                <div class="balance-card">
+                    <i class="fas fa-coins"></i>
+                    <div>
+                        <span class="balance-label">Зоос</span>
+                        <span class="balance-amount" id="coin">0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="coin-price">
+                <i class="fas fa-chart-line"></i>
+                <span>1 COIN = </span>
+                <span id="coinPrice">3000</span>
+                <span>💰</span>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item active">
+                    <a href="/">
+                        <i class="fas fa-home"></i>
+                        <span>Нүүр</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/game">
+                        <i class="fas fa-dice"></i>
+                        <span>Тоглоом</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/shop">
+                        <i class="fas fa-store"></i>
+                        <span>Дэлгүүр</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/inventory">
+                        <i class="fas fa-box"></i>
+                        <span>Агуулах</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/coinchart">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Coin график</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/leaderboard">
+                        <i class="fas fa-trophy"></i>
+                        <span>Лидерборд</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="auth-section" id="authSection">
+                <input type="text" id="userIdInput" placeholder="Discord ID-ээ оруулна уу" class="user-id-input">
+                <button id="loginBtn" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i> Нэвтрэх
+                </button>
+                <p class="help-text">Discord ID-ээ оруулан тоглоомонд нэвтэрнэ үү</p>
+            </div>
+        </nav>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="welcome-section">
+                <h1>🎮 VINNIE BOT - Вэб тоглоом</h1>
+                <p>Discord-ын эдийн засгийн боттой холбогдож, вэбээр тоглоом тоглох</p>
+            </div>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <i class="fas fa-dice"></i>
+                    <h3>🎰 Слот машин</h3>
+                    <p>Зоосоор тоглож, их хэмжээний шагнал хожих боломж</p>
+                    <a href="/game#slots" class="feature-btn">Тоглох →</a>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-wheelchair"></i>
+                    <h3>🎲 Рулетка</h3>
+                    <p>Улаан, хар, тэгш, сондгой, тоон дээр бооцоо тавих</p>
+                    <a href="/game#roulette" class="feature-btn">Тоглох →</a>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-pick"></i>
+                    <h3>⛏️ Уурхайчин</h3>
+                    <p>Эрдэс бодис олборлож, зарж мөнгө олох</p>
+                    <a href="/game#mine" class="feature-btn">Тоглох →</a>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-store"></i>
+                    <h3>🛒 Дэлгүүр</h3>
+                    <p>Зоос, багаж, түлхүүр, эрдэс худалдан авах</p>
+                    <a href="/shop" class="feature-btn">Үзэх →</a>
+                </div>
+            </div>
+            
+            <div class="stats-section">
+                <h2>📊 Статистик</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-info">
+                            <span class="stat-label">Нийт тоглогч</span>
+                            <span class="stat-value" id="totalPlayers">-</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🎮</div>
+                        <div class="stat-info">
+                            <span class="stat-label">Тоглосон</span>
+                            <span class="stat-value" id="totalGames">-</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-info">
+                            <span class="stat-label">Нийт мөнгө</span>
+                            <span class="stat-value" id="totalMoney">-</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🪙</div>
+                        <div class="stat-info">
+                            <span class="stat-label">Нийт зоос</span>
+                            <span class="stat-value" id="totalCoins">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="recent-winners">
+                <h2>🏆 Сүүлийн хожсон тоглогчид</h2>
+                <div class="winners-list" id="winnersList">
+                    <div class="winner-item">Мэдээлэл байхгүй</div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+</html>

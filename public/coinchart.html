@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VINNIE BOT - Coin график</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/coinchart.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Chart.js график библиотек -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="VINNIE BOT">
+                <h2>VINNIE BOT</h2>
+            </div>
+            
+            <div class="user-info" id="userInfo">
+                <div class="user-avatar">
+                    <img id="userAvatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%;">
+                </div>
+                <div class="user-details">
+                    <span class="user-name" id="userName">Зочны хэрэглэгч</span>
+                    <span class="user-id" id="userId"></span>
+                </div>
+                <div class="user-menu">
+                    <button class="user-menu-btn" id="userMenuBtn">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="/profile"><i class="fas fa-user"></i> Профайл</a>  <!-- Edit Account-ийг Profile-р сольсон -->
+                        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Гарах</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="balance-cards">
+                <div class="balance-card">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <div>
+                        <span class="balance-label">Мөнгө</span>
+                        <span class="balance-amount" id="money">0</span>
+                    </div>
+                </div>
+                <div class="balance-card">
+                    <i class="fas fa-piggy-bank"></i>
+                    <div>
+                        <span class="balance-label">Банк</span>
+                        <span class="balance-amount" id="bank">0</span>
+                    </div>
+                </div>
+                <div class="balance-card">
+                    <i class="fas fa-coins"></i>
+                    <div>
+                        <span class="balance-label">Зоос</span>
+                        <span class="balance-amount" id="coin">0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="coin-price">
+                <i class="fas fa-chart-line"></i>
+                <span>1 COIN = </span>
+                <span id="coinPrice">3000</span>
+                <span>💰</span>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="/">
+                        <i class="fas fa-home"></i>
+                        <span>Нүүр</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/game">
+                        <i class="fas fa-dice"></i>
+                        <span>Тоглоом</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/shop">
+                        <i class="fas fa-store"></i>
+                        <span>Дэлгүүр</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/inventory">
+                        <i class="fas fa-box"></i>
+                        <span>Агуулах</span>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a href="/coinchart">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Coin график</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/leaderboard">
+                        <i class="fas fa-trophy"></i>
+                        <span>Лидерборд</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="auth-section" id="authSection">
+                <input type="text" id="userIdInput" placeholder="Discord ID-ээ оруулна уу" class="user-id-input">
+                <button id="loginBtn" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i> Нэвтрэх
+                </button>
+            </div>
+        </nav>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="chart-header">
+                <h1><i class="fas fa-chart-line"></i> COIN ҮНИЙН ГРАФИК</h1>
+                <div class="current-price-card">
+                    <div class="current-price-label">Одоогийн үнэ</div>
+                    <div class="current-price-value" id="currentPrice">3,000</div>
+                    <div class="price-change" id="priceChange">📈 +0.00%</div>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="coinChart"></canvas>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-icon">📈</div>
+                    <div class="stat-label">24ц дээд</div>
+                    <div class="stat-value" id="high24h">0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon">📉</div>
+                    <div class="stat-label">24ц доод</div>
+                    <div class="stat-value" id="low24h">0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-label">Дундаж</div>
+                    <div class="stat-value" id="averagePrice">0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-label">Хэлбэлзэл</div>
+                    <div class="stat-value" id="volatility">0%</div>
+                </div>
+            </div>
+            
+            <div class="time-controls">
+                <button class="time-btn active" data-hours="1">1ц</button>
+                <button class="time-btn" data-hours="6">6ц</button>
+                <button class="time-btn" data-hours="12">12ц</button>
+                <button class="time-btn" data-hours="24">24ц</button>
+                <button class="time-btn" data-hours="168">7х</button>
+                <button class="time-btn" data-hours="720">30х</button>
+            </div>
+            
+            <div class="price-history">
+                <h3>📋 Үнийн түүх</h3>
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Цаг</th>
+                            <th>Үнэ</th>
+                            <th>Өөрчлөлт</th>
+                        </tr>
+                    </thead>
+                    <tbody id="priceHistoryBody">
+                        <tr>
+                            <td colspan="3" class="loading">Ачааллаж байна...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/coinchart.js"></script>
+</body>
+</html>

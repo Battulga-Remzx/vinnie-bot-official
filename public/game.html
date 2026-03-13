@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VINNIE BOT - Тоглоом</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/game.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="VINNIE BOT">
+                <h2>VINNIE BOT</h2>
+            </div>
+            
+            <!-- ✅ ЗӨВ: user-info -->
+            <div class="user-info" id="userInfo">
+                <div class="user-avatar">
+                    <img id="userAvatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid #4ecca3;">
+                </div>
+                <div class="user-details">
+                    <span class="user-name" id="userName">Ачааллаж байна...</span>
+                    <span class="user-id" id="userId"></span>
+                </div>
+                <div class="user-menu">
+                    <button class="user-menu-btn" id="userMenuBtn">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="/profile"><i class="fas fa-user"></i> Профайл</a>
+                        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Гарах</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="balance-cards">
+                <div class="balance-card">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <div>
+                        <span class="balance-label">Мөнгө</span>
+                        <span class="balance-amount" id="money">0</span>
+                    </div>
+                </div>
+                <div class="balance-card">
+                    <i class="fas fa-piggy-bank"></i>
+                    <div>
+                        <span class="balance-label">Банк</span>
+                        <span class="balance-amount" id="bank">0</span>
+                    </div>
+                </div>
+                <div class="balance-card">
+                    <i class="fas fa-coins"></i>
+                    <div>
+                        <span class="balance-label">Зоос</span>
+                        <span class="balance-amount" id="coin">0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="coin-price">
+                <i class="fas fa-chart-line"></i>
+                <span>1 COIN = </span>
+                <span id="coinPrice">3000</span>
+                <span>💰</span>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="/">
+                        <i class="fas fa-home"></i>
+                        <span>Нүүр</span>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a href="/game">
+                        <i class="fas fa-dice"></i>
+                        <span>Тоглоом</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/shop">
+                        <i class="fas fa-store"></i>
+                        <span>Дэлгүүр</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/inventory">
+                        <i class="fas fa-box"></i>
+                        <span>Агуулах</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/coinchart">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Coin график</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/leaderboard">
+                        <i class="fas fa-trophy"></i>
+                        <span>Лидерборд</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="game-tabs">
+                <button class="tab-btn active" data-tab="slots">🎰 Слот машин</button>
+                <button class="tab-btn" data-tab="roulette">🎲 Рулетка</button>
+                <button class="tab-btn" data-tab="jobs">💼 Ажлын тоглоом</button>
+            </div>
+            
+            <!-- СЛОТ МАШИН -->
+            <div id="slots" class="tab-content active">
+                <div class="game-container">
+                    <h2>🎰 СЛОТ МАШИН</h2>
+                    
+                    <div class="slots-machine">
+                        <div class="slot" id="slot1">🍋</div>
+                        <div class="slot" id="slot2">🍋</div>
+                        <div class="slot" id="slot3">🍋</div>
+                    </div>
+                    
+                    <div class="game-controls">
+                        <div class="bet-control">
+                            <label for="slotBet">Бооцооны дүн (🪙):</label>
+                            <input type="number" id="slotBet" min="1" max="1000" value="10">
+                        </div>
+                        
+                        <button id="spinBtn" class="game-btn spin-btn">
+                            <i class="fas fa-sync-alt"></i> ЭРГҮҮЛЭХ
+                        </button>
+                    </div>
+                    
+                    <div class="game-info">
+                        <p>🎰 3 ижил тэмдэг: <span class="highlight">x10</span> | 🎰 2 ижил тэмдэг: <span class="highlight">x2</span></p>
+                    </div>
+                    
+                    <div class="result-area" id="slotResult"></div>
+                </div>
+            </div>
+            
+            <!-- РУЛЕТКА -->
+            <div id="roulette" class="tab-content">
+                <div class="game-container">
+                    <h2>🎲 РУЛЕТКА</h2>
+                    
+                    <div class="roulette-wheel">
+                        <div class="wheel-number" id="rouletteNumber">?</div>
+                        <div class="wheel-color" id="rouletteColor">⚫</div>
+                    </div>
+                    
+                    <div class="bet-types">
+                        <div class="bet-type">
+                            <button class="bet-option red" data-bet="red">🔴 УЛААН (x2)</button>
+                            <button class="bet-option black" data-bet="black">⚫ ХАР (x2)</button>
+                        </div>
+                        <div class="bet-type">
+                            <button class="bet-option" data-bet="even">🟣 ТЭГШ (x2)</button>
+                            <button class="bet-option" data-bet="odd">🟡 СОНДГОЙ (x2)</button>
+                        </div>
+                        <div class="bet-type">
+                            <label>Тоо (0-36) <span class="highlight">x36</span></label>
+                            <div class="number-bet">
+                                <input type="number" id="betNumber" min="0" max="36" value="7">
+                                <button class="bet-option" data-bet="number">ТОХИРУУЛАХ</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-controls">
+                        <div class="bet-control">
+                            <label for="rouletteBet">Бооцооны дүн (🪙):</label>
+                            <input type="number" id="rouletteBet" min="1" max="1000" value="10">
+                        </div>
+                        
+                        <button id="rouletteSpinBtn" class="game-btn spin-btn">
+                            <i class="fas fa-sync-alt"></i> ЭРГҮҮЛЭХ
+                        </button>
+                    </div>
+                    
+                    <div class="result-area" id="rouletteResult"></div>
+                </div>
+            </div>
+            
+            <!-- АЖЛЫН ТОГЛООМ -->
+            <div id="jobs" class="tab-content">
+                <!-- Ажил шалгах хэсэг -->
+                <div class="job-check" id="jobCheck">
+                    <h2>💼 ТАНЫ АЖИЛ</h2>
+                    <div class="current-job" id="currentJobDisplay">
+                        <span class="job-icon">⛏️</span>
+                        <span class="job-name">Уурхайчин</span>
+                    </div>
+                    <p class="job-description" id="jobDescription">Газраас эрдэс бодис олборлож, зарж мөнгө олох</p>
+                </div>
+                
+                <!-- УУРХАЙЧИН -->
+                <div id="minerGame" class="job-game active">
+                    <div class="game-container">
+                        <h2>⛏️ УУРХАЙЧНЫ ОЛБОРЛОЛТ</h2>
+                        
+                        <div class="mine-area">
+                            <div class="resources">
+                                <div class="resource-item">
+                                    <span class="resource-emoji">⬛</span>
+                                    <span>Нүүрс: <span id="coalCount">0</span></span>
+                                </div>
+                                <div class="resource-item">
+                                    <span class="resource-emoji">⛓️</span>
+                                    <span>Төмөр: <span id="ironCount">0</span></span>
+                                </div>
+                                <div class="resource-item">
+                                    <span class="resource-emoji">🪙</span>
+                                    <span>Алт: <span id="goldCount">0</span></span>
+                                </div>
+                                <div class="resource-item">
+                                    <span class="resource-emoji">💎</span>
+                                    <span>Алмааз: <span id="diamondCount">0</span></span>
+                                </div>
+                                <div class="resource-item">
+                                    <span class="resource-emoji">⚛️</span>
+                                    <span>Антиматтер: <span id="antimatterCount">0</span></span>
+                                </div>
+                            </div>
+                            
+                            <div class="mine-controls">
+                                <button id="mineBtn" class="game-btn mine-btn">
+                                    <i class="fas fa-hammer"></i> ОЛБОРЛОХ
+                                </button>
+                                <p class="mine-cooldown" id="mineCooldown"></p>
+                            </div>
+                        </div>
+                        
+                        <div class="mine-chances">
+                            <h3>Олборлолтын магадлал:</h3>
+                            <ul>
+                                <li>⬛ Нүүрс: 50%</li>
+                                <li>⛓️ Төмөр: 25%</li>
+                                <li>🪙 Алт: 15%</li>
+                                <li>💎 Алмааз: 8%</li>
+                                <li>⚛️ Антиматтер: 2%</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="result-area" id="mineResult"></div>
+                    </div>
+                </div>
+                
+                <!-- ЦАГДАА -->
+                <div id="policeGame" class="job-game">
+                    <div class="game-container">
+                        <h2>👮 ЦАГДААГИЙН ЭРГҮҮЛ</h2>
+                        
+                        <div class="police-stats">
+                            <div class="stat-card">
+                                <span class="stat-icon">🚨</span>
+                                <span class="stat-label">Эргүүлийн тоо</span>
+                                <span class="stat-value" id="patrolCount">0</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-icon">💰</span>
+                                <span class="stat-label">Нийт олсон</span>
+                                <span class="stat-value" id="totalEarned">0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="police-controls">
+                            <button id="patrolBtn" class="game-btn police-btn">
+                                <i class="fas fa-shield-alt"></i> ЭРГҮҮЛ ХИЙХ
+                            </button>
+                            <p class="police-cooldown" id="policeCooldown"></p>
+                        </div>
+                        
+                        <div class="police-events">
+                            <h3>🚨 БОЛОМЖИТ ҮЙЛ ЯВДЛУУД:</h3>
+                            <ul>
+                                <li>🚗 Хурд хэтрүүлсэн машин - 300💰</li>
+                                <li>🏃 Хулгайч - 500💰</li>
+                                <li>🚔 Осол - 400💰</li>
+                                <li>🔫 Зэвсэгт этгээд - 800💰</li>
+                                <li>👤 Согтуу жолооч - 450💰</li>
+                                <li>🏆 Онцгой - 1000💰</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="result-area" id="policeResult"></div>
+                    </div>
+                </div>
+                
+                <!-- ЭМЧ -->
+                <div id="doctorGame" class="job-game">
+                    <div class="game-container">
+                        <h2>👩‍⚕️ ЭМЧИЛГЭЭ</h2>
+                        
+                        <div class="doctor-stats">
+                            <div class="stat-card">
+                                <span class="stat-icon">🩺</span>
+                                <span class="stat-label">Эмчилсэн өвчтөн</span>
+                                <span class="stat-value" id="patientCount">0</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-icon">💝</span>
+                                <span class="stat-label">Талархлын мөнгө</span>
+                                <span class="stat-value" id="totalTips">0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="doctor-controls">
+                            <button id="healBtn" class="game-btn doctor-btn">
+                                <i class="fas fa-heartbeat"></i> ЭМЧИЛЭХ
+                            </button>
+                            <p class="doctor-cooldown" id="doctorCooldown"></p>
+                        </div>
+                        
+                        <div class="doctor-patients">
+                            <h3>🩺 ӨВЧТӨНҮҮД:</h3>
+                            <ul>
+                                <li>🤒 Ханиадтай хүүхэд - 250💰</li>
+                                <li>🦴 Хөл хугарсан иргэн - 600💰</li>
+                                <li>🏥 Түргэн тусламж - 800💰</li>
+                                <li>⚕️ Хагалгаа - 1200💰</li>
+                                <li>🫀 Зүрхний шинжилгээ - 900💰</li>
+                                <li>🤰 Жирэмсний хяналт - 500💰</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="result-area" id="doctorResult"></div>
+                    </div>
+                </div>
+                
+                <!-- БҮЛЭГЛЭЛ -->
+                <div id="gangGame" class="job-game">
+                    <div class="game-container">
+                        <h2>👹 БҮЛЭГЛЭЛИЙН ДЭЭРЭМ</h2>
+                        
+                        <div class="gang-stats">
+                            <div class="stat-card">
+                                <span class="stat-icon">🔧</span>
+                                <span class="stat-label">Багаж</span>
+                                <span class="stat-value" id="gangTools">0</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-icon">🔑</span>
+                                <span class="stat-label">Түлхүүр</span>
+                                <span class="stat-value" id="gangKeys">0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="robbery-guide">
+                            <h3>📋 ДЭЭРЭМ ХИЙХ ЗААВАР</h3>
+                            <div class="guide-item">
+                                <span class="guide-icon">💰</span>
+                                <h4>Бэлэн мөнгө дээрэмдэх</h4>
+                                <p>Амжилт: 60% (багажтай бол 70%)</p>
+                                <p>Хязгаар: 50-500 💰</p>
+                                <p>Шаардлага: багаж (250 💰)</p>
+                            </div>
+                            <div class="guide-item">
+                                <span class="guide-icon">🏦</span>
+                                <h4>Банкны мөнгө дээрэмдэх (Lockpick)</h4>
+                                <p>Амжилт: 40% (багажтай бол 50%)</p>
+                                <p>Хязгаар: 50-1000 💰</p>
+                                <p>Шаардлага: түлхүүр (1 ширхэг)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="targets-section">
+                            <h3>🎯 БОЛОМЖИТ ЗОРИЛТУУД</h3>
+                            <div class="targets-list" id="targetsList">
+                                <div class="target-item">
+                                    <div class="target-info">
+                                        <span class="target-name">Ачааллаж байна...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="result-area" id="gangResult"></div>
+                    </div>
+                </div>
+                
+                <!-- АЖИЛГҮЙ -->
+                <div id="noJobGame" class="job-game">
+                    <div class="game-container">
+                        <div class="no-job-message">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h3>ТА АЖИЛГҮЙ БАЙНА</h3>
+                            <p>Ажилтай хүмүүс л ажлын тоглоом тоглох боломжтой.</p>
+                            <p>Дэлгүүрээс ажлын багаж худалдаж аваад ажилд орно уу.</p>
+                            <a href="/shop" class="btn btn-primary">⚡ ДЭЛГҮҮР РҮҮ ОЧИХ</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/game.js"></script>
+</body>
+</html>

@@ -1,0 +1,1022 @@
+/* public/css/game.css - БҮРЭН ШИНЭЧИЛСЭН ХУВИЛБАР */
+
+/* ==================== ҮНДСЭН ТОХИРГОО ==================== */
+.game-tabs {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    padding: 10px;
+    background: rgba(15, 52, 96, 0.5);
+    border-radius: 15px;
+    border: 1px solid rgba(78, 204, 163, 0.3);
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    padding: 12px 25px;
+    background: transparent;
+    border: 2px solid rgba(78, 204, 163, 0.3);
+    color: #aaa;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 10px;
+    font-weight: bold;
+    flex: 1;
+    min-width: 120px;
+}
+
+.tab-btn:hover {
+    border-color: #4ecca3;
+    color: #4ecca3;
+    transform: translateY(-2px);
+}
+
+.tab-btn.active {
+    background: linear-gradient(45deg, #4ecca3, #2c7865);
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(78, 204, 163, 0.4);
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.game-container {
+    background: rgba(15, 52, 96, 0.7);
+    border-radius: 20px;
+    padding: 30px;
+    border: 1px solid rgba(78, 204, 163, 0.3);
+    backdrop-filter: blur(5px);
+    margin-bottom: 20px;
+}
+
+.game-container h2 {
+    text-align: center;
+    color: #ffd369;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    text-shadow: 0 0 20px rgba(255, 211, 105, 0.3);
+}
+
+/* ==================== СЛОТ МАШИН ==================== */
+.slots-machine {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin: 50px 0;
+    perspective: 1000px;
+}
+
+.slot {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #0f3460, #16213e);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    border: 3px solid #4ecca3;
+    box-shadow: 0 0 30px rgba(78, 204, 163, 0.5);
+    animation: slotGlow 2s infinite;
+    transform-style: preserve-3d;
+    transition: transform 0.3s;
+}
+
+.slot:hover {
+    transform: rotateY(10deg) rotateX(5deg);
+}
+
+@keyframes slotGlow {
+    0%, 100% { box-shadow: 0 0 30px rgba(78, 204, 163, 0.5); }
+    50% { box-shadow: 0 0 60px rgba(78, 204, 163, 0.8); }
+}
+
+/* ==================== РУЛЕТКА ==================== */
+.roulette-wheel {
+    width: 250px;
+    height: 250px;
+    background: conic-gradient(
+        #ed4245 0deg 30deg,
+        #23272a 30deg 60deg,
+        #ed4245 60deg 90deg,
+        #23272a 90deg 120deg,
+        #ed4245 120deg 150deg,
+        #23272a 150deg 180deg,
+        #ed4245 180deg 210deg,
+        #23272a 210deg 240deg,
+        #ed4245 240deg 270deg,
+        #23272a 270deg 300deg,
+        #ed4245 300deg 330deg,
+        #23272a 330deg 360deg
+    );
+    border-radius: 50%;
+    margin: 0 auto 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 8px solid #ffd369;
+    box-shadow: 0 0 50px rgba(255, 211, 105, 0.5);
+    position: relative;
+    animation: wheelSpin 10s linear infinite;
+}
+
+@keyframes wheelSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.roulette-wheel:hover {
+    animation-play-state: paused;
+}
+
+.roulette-wheel::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 50%;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px #fff;
+}
+
+.wheel-number {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.7);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.wheel-color {
+    font-size: 2.5rem;
+    margin-top: 5px;
+}
+
+.bet-types {
+    margin-bottom: 30px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.bet-type {
+    margin-bottom: 15px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.bet-option {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: bold;
+    min-width: 120px;
+    position: relative;
+    overflow: hidden;
+}
+
+.bet-option::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.bet-option:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.bet-option.red {
+    background: linear-gradient(45deg, #ed4245, #b0302a);
+    color: white;
+}
+
+.bet-option.black {
+    background: linear-gradient(45deg, #23272a, #000000);
+    color: white;
+}
+
+.bet-option:not(.red):not(.black) {
+    background: linear-gradient(45deg, #4ecca3, #2c7865);
+    color: white;
+}
+
+.bet-option:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(255, 255, 255, 0.3);
+}
+
+.number-bet {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.number-bet input {
+    width: 100px;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid #4ecca3;
+    border-radius: 10px;
+    color: #fff;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.number-bet input:focus {
+    outline: none;
+    border-color: #ffd369;
+    box-shadow: 0 0 15px rgba(255, 211, 105, 0.3);
+}
+
+/* ==================== УУРХАЙЧИН ==================== */
+.mine-area {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.resources {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.resource-item {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid rgba(78, 204, 163, 0.3);
+    transition: all 0.3s;
+}
+
+.resource-item:hover {
+    transform: translateX(5px);
+    border-color: #ffd369;
+}
+
+.resource-emoji {
+    font-size: 2.2rem;
+    filter: drop-shadow(0 0 10px currentColor);
+}
+
+.resource-item:nth-child(1) .resource-emoji { color: #666; }
+.resource-item:nth-child(2) .resource-emoji { color: #a5a5a5; }
+.resource-item:nth-child(3) .resource-emoji { color: #ffd700; }
+.resource-item:nth-child(4) .resource-emoji { color: #b9f2ff; }
+.resource-item:nth-child(5) .resource-emoji { color: #8a2be2; }
+
+.mine-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    padding: 30px;
+}
+
+.mine-btn {
+    padding: 25px 50px;
+    font-size: 2rem;
+    background: linear-gradient(45deg, #8B4513, #654321);
+    color: #ffd700;
+    border: 3px solid #ffd700;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+}
+
+.mine-btn::before {
+    content: '⛏️';
+    position: absolute;
+    left: -30px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    transition: left 0.3s;
+}
+
+.mine-btn:hover::before {
+    left: 20px;
+}
+
+.mine-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 50px rgba(255, 215, 0, 0.5);
+    background: linear-gradient(45deg, #654321, #8B4513);
+}
+
+.mine-cooldown {
+    color: #ffd369;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 211, 105, 0.5);
+}
+
+.mine-chances {
+    grid-column: span 2;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.mine-chances h3 {
+    color: #ffd369;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.mine-chances ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+}
+
+.mine-chances li {
+    text-align: center;
+    padding: 12px;
+    background: rgba(78, 204, 163, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(78, 204, 163, 0.3);
+    transition: all 0.3s;
+}
+
+.mine-chances li:hover {
+    transform: scale(1.05);
+    border-color: #ffd369;
+}
+
+/* ==================== ЦАГДАА ==================== */
+.police-stats, .doctor-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid rgba(78, 204, 163, 0.3);
+}
+
+.stat-icon {
+    font-size: 2.5rem;
+}
+
+.stat-label {
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+.stat-value {
+    color: #4ecca3;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.police-controls, .doctor-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.police-btn, .doctor-btn {
+    padding: 20px 40px;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 300px;
+}
+
+.police-btn {
+    background: linear-gradient(45deg, #4169E1, #1E3A8A);
+    box-shadow: 0 0 20px rgba(65, 105, 225, 0.5);
+}
+
+.doctor-btn {
+    background: linear-gradient(45deg, #FF69B4, #C71585);
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+}
+
+.police-btn:hover, .doctor-btn:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+.police-btn::before, .doctor-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s;
+}
+
+.police-btn:hover::before, .doctor-btn:hover::before {
+    left: 100%;
+}
+
+.police-cooldown, .doctor-cooldown {
+    color: #ffd369;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.police-events, .doctor-patients {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.police-events h3, .doctor-patients h3 {
+    color: #ffd369;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.police-events ul, .doctor-patients ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+}
+
+.police-events li, .doctor-patients li {
+    padding: 10px;
+    background: rgba(78, 204, 163, 0.1);
+    border-radius: 8px;
+    color: #fff;
+    text-align: center;
+    font-size: 0.95rem;
+    border: 1px solid rgba(78, 204, 163, 0.2);
+}
+
+/* ==================== ЭМЧ ==================== */
+.doctor-patients ul {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 768px) {
+    .doctor-patients ul {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ==================== БҮЛЭГЛЭЛ ==================== */
+.gang-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.robbery-guide {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+}
+
+.robbery-guide h3 {
+    color: #ffd369;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.guide-item {
+    background: rgba(78, 204, 163, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(78, 204, 163, 0.3);
+}
+
+.guide-item:last-child {
+    margin-bottom: 0;
+}
+
+.guide-icon {
+    font-size: 2rem;
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.guide-item h4 {
+    color: #ffd369;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.guide-item p {
+    color: #aaa;
+    font-size: 0.95rem;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.targets-section {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.targets-section h3 {
+    color: #ffd369;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.targets-list {
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.targets-list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.targets-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.targets-list::-webkit-scrollbar-thumb {
+    background: #4ecca3;
+    border-radius: 10px;
+}
+
+.target-item {
+    background: rgba(78, 204, 163, 0.1);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(78, 204, 163, 0.3);
+    transition: all 0.3s;
+}
+
+.target-item:hover {
+    background: rgba(78, 204, 163, 0.2);
+    transform: translateX(5px);
+}
+
+.target-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.target-name {
+    color: #ffd369;
+    font-weight: bold;
+}
+
+.target-money {
+    color: #4ecca3;
+    font-size: 0.9rem;
+}
+
+.target-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.rob-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.rob-money {
+    background: rgba(78, 204, 163, 0.2);
+    color: #4ecca3;
+    border: 1px solid #4ecca3;
+}
+
+.rob-money:hover {
+    background: #4ecca3;
+    color: #16213e;
+}
+
+.rob-bank {
+    background: rgba(237, 66, 69, 0.2);
+    color: #ed4245;
+    border: 1px solid #ed4245;
+}
+
+.rob-bank:hover {
+    background: #ed4245;
+    color: white;
+}
+
+.rob-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* ==================== АЖЛЫН ТОГЛООМ ==================== */
+.job-game {
+    display: none;
+}
+
+.job-game.active {
+    display: block;
+    animation: fadeIn 0.5s;
+}
+
+.job-check {
+    background: rgba(78, 204, 163, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 25px;
+    border: 1px solid #4ecca3;
+}
+
+.job-check h2 {
+    color: #ffd369;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.current-job {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+.job-icon {
+    font-size: 3rem;
+}
+
+.job-name {
+    font-size: 1.5rem;
+    color: #ffd369;
+    font-weight: bold;
+}
+
+.job-description {
+    color: #aaa;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.no-job-message {
+    text-align: center;
+    padding: 50px 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+}
+
+.no-job-message i {
+    font-size: 4rem;
+    color: #ffd369;
+    margin-bottom: 20px;
+}
+
+.no-job-message h3 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.no-job-message p {
+    color: #aaa;
+    margin-bottom: 25px;
+}
+
+.no-job-message .btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background: linear-gradient(45deg, #4ecca3, #2c7865);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.no-job-message .btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px rgba(78, 204, 163, 0.4);
+}
+
+/* ==================== НИЙТЛЭГ ХЯНАЛТ ==================== */
+.game-controls {
+    margin: 30px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.bet-control {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.bet-control label {
+    color: #aaa;
+    font-size: 1rem;
+}
+
+.bet-control input {
+    width: 120px;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid #4ecca3;
+    border-radius: 8px;
+    color: #fff;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.bet-control input:focus {
+    outline: none;
+    border-color: #ffd369;
+}
+
+.spin-btn {
+    padding: 15px 40px;
+    font-size: 1.3rem;
+    background: linear-gradient(45deg, #4ecca3, #2c7865);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.spin-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.spin-btn:hover::before {
+    left: 100%;
+}
+
+.spin-btn:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 10px 30px rgba(78, 204, 163, 0.5);
+    background: linear-gradient(45deg, #ffd369, #ff9f68);
+}
+
+.spin-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.spin-btn:disabled:hover {
+    background: linear-gradient(45deg, #4ecca3, #2c7865);
+    box-shadow: none;
+}
+
+.game-info {
+    text-align: center;
+    color: #aaa;
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.highlight {
+    color: #ffd369;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.result-area {
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 1.2rem;
+    animation: slideIn 0.5s;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.result-area.success {
+    background: linear-gradient(135deg, rgba(87, 242, 135, 0.2), rgba(87, 242, 135, 0.1));
+    color: #57f287;
+    border: 2px solid #57f287;
+    box-shadow: 0 0 20px rgba(87, 242, 135, 0.3);
+}
+
+.result-area.error {
+    background: linear-gradient(135deg, rgba(237, 66, 69, 0.2), rgba(237, 66, 69, 0.1));
+    color: #ed4245;
+    border: 2px solid #ed4245;
+    box-shadow: 0 0 20px rgba(237, 66, 69, 0.3);
+}
+
+/* ==================== АНИМЭЙШНҮҮД ==================== */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.roulette-wheel.spinning {
+    animation: spin 4s ease-out !important;
+}
+
+.slot.spinning {
+    animation: slotGlow 0.2s infinite alternate;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+    .game-tabs {
+        flex-direction: column;
+    }
+    
+    .tab-btn {
+        width: 100%;
+    }
+    
+    .slots-machine {
+        gap: 15px;
+    }
+    
+    .slot {
+        width: 80px;
+        height: 80px;
+        font-size: 3.5rem;
+    }
+    
+    .roulette-wheel {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .wheel-number {
+        font-size: 3rem;
+        width: 80px;
+        height: 80px;
+    }
+    
+    .mine-area {
+        grid-template-columns: 1fr;
+    }
+    
+    .mine-chances ul {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .police-events ul, .doctor-patients ul {
+        grid-template-columns: 1fr;
+    }
+    
+    .target-item {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .target-actions {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .game-controls {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .slot {
+        width: 60px;
+        height: 60px;
+        font-size: 2.5rem;
+    }
+    
+    .bet-type {
+        flex-direction: column;
+    }
+    
+    .number-bet {
+        flex-direction: column;
+    }
+    
+    .number-bet input {
+        width: 100%;
+    }
+    
+    .bet-option {
+        width: 100%;
+    }
+    
+    .mine-chances ul {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .police-btn, .doctor-btn {
+        font-size: 1.2rem;
+        padding: 15px 20px;
+    }
+}

@@ -1,0 +1,101 @@
+{
+  "users": {
+    "lastprice": {
+      "money": 0,
+      "bank": 0,
+      "coin": 2684,
+      "job": null,
+      "working": false,
+      "inventory": {
+        "coal": 0,
+        "iron": 0,
+        "gold": 0,
+        "diamond": 0,
+        "antimatter": 0,
+        "tools": 0,
+        "keys": 0
+      },
+      "tools": {
+        "miner": false,
+        "doctor": false,
+        "police": false,
+        "gang": false
+      },
+      "cooldowns": {},
+      "stats": {
+        "gamesPlayed": 0,
+        "totalWon": 0,
+        "totalLost": 0
+      }
+    },
+    "prevprice": {
+      "money": 0,
+      "bank": 0,
+      "coin": 2935,
+      "job": null,
+      "working": false,
+      "inventory": {
+        "coal": 0,
+        "iron": 0,
+        "gold": 0,
+        "diamond": 0,
+        "antimatter": 0,
+        "tools": 0,
+        "keys": 0
+      },
+      "tools": {
+        "miner": false,
+        "doctor": false,
+        "police": false,
+        "gang": false
+      },
+      "cooldowns": {},
+      "stats": {
+        "gamesPlayed": 0,
+        "totalWon": 0,
+        "totalLost": 0
+      }
+    },
+    "1443224124796436531": {
+      "money": 818,
+      "bank": 0,
+      "coin": 0,
+      "job": null,
+      "working": false,
+      "inventory": {
+        "coal": 0,
+        "iron": 0,
+        "gold": 0,
+        "diamond": 0,
+        "antimatter": 0,
+        "tools": 0,
+        "keys": 0
+      },
+      "tools": {
+        "miner": false,
+        "doctor": false,
+        "police": false,
+        "gang": false
+      },
+      "cooldowns": {},
+      "stats": {
+        "gamesPlayed": 0,
+        "totalWon": 0,
+        "totalLost": 0
+      }
+    }
+  },
+  "system": {
+    "coinPrice": {
+      "current": 2684,
+      "previous": 2935,
+      "lastUpdated": 1773121317440
+    },
+    "stats": {
+      "totalUsers": 3,
+      "totalMoney": 818,
+      "totalCoins": 5619,
+      "totalCommands": 0
+    }
+  }
+}
