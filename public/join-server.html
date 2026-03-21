@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VINNIE BOT - Серверт нэгдэх</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .join-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            padding: 20px;
+        }
+        
+        .join-card {
+            background: rgba(15, 52, 96, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 50px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            border: 2px solid rgba(78, 204, 163, 0.5);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 0.5s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .join-icon {
+            font-size: 80px;
+            color: #5865F2;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .join-card h1 {
+            font-size: 2rem;
+            color: #ffd369;
+            margin-bottom: 15px;
+        }
+        
+        .join-card p {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .discord-invite-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: #5865F2;
+            color: white;
+            padding: 16px 40px;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        
+        .discord-invite-btn:hover {
+            background: #4752c4;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(88, 101, 242, 0.4);
+        }
+        
+        .check-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(45deg, #4ecca3, #2c7865);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 15px;
+        }
+        
+        .check-btn:hover {
+            background: linear-gradient(45deg, #ffd369, #ff9f68);
+            transform: translateY(-2px);
+        }
+        
+        .check-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .logout-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #ed4245;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .logout-link:hover {
+            color: #ff6b6b;
+            text-decoration: underline;
+        }
+        
+        .status-message {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .status-message.success {
+            display: block;
+            background: rgba(87, 242, 135, 0.2);
+            border: 1px solid #57f287;
+            color: #57f287;
+        }
+        
+        .status-message.error {
+            display: block;
+            background: rgba(237, 66, 69, 0.2);
+            border: 1px solid #ed4245;
+            color: #ed4245;
+        }
+        
+        .status-message.warning {
+            display: block;
+            background: rgba(254, 231, 92, 0.2);
+            border: 1px solid #fee75c;
+            color: #fee75c;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+        }
+        
+        .user-info img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid #4ecca3;
+        }
+        
+        .user-info span {
+            font-weight: bold;
+            color: #ffd369;
+        }
+        
+        @media (max-width: 480px) {
+            .join-card {
+                padding: 30px 20px;
+            }
+            
+            .join-card h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="join-container">
+        <div class="join-card">
+            <div class="join-icon">
+                <i class="fab fa-discord"></i>
+            </div>
+            
+            <div id="userInfo" class="user-info" style="display: none;">
+                <img id="userAvatar" src="" alt="Avatar">
+                <span id="userName"></span>
+            </div>
+            
+            <h1>🎮 VINNIE BOT ТОГЛООМ</h1>
+            <p>
+                Тоглоом тоглохын тулд та манай Discord серверт нэгдсэн байх шаардлагатай.<br>
+                Доорх товчоор серверт нэгдээд, дараа нь "Шалгах" товчийг дарна уу.
+            </p>
+            
+            <a id="inviteLink" href="#" class="discord-invite-btn" target="_blank">
+                <i class="fab fa-discord"></i>
+                Discord серверт нэгдэх
+            </a>
+            
+            <button id="checkBtn" class="check-btn">
+                <i class="fas fa-check-circle"></i>
+                Серверт нэгдсэн эсэхээ шалгах
+            </button>
+            
+            <div id="statusMessage" class="status-message"></div>
+            
+            <a href="/logout" class="logout-link">
+                <i class="fas fa-sign-out-alt"></i>
+                Гарах
+            </a>
+        </div>
+    </div>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        
+        let inviteLink = 'https://discord.gg/YOUR_INVITE';
+        let guildId = '';
+        
+        // Хэрэглэгчийн мэдээлэл авах
+        async function fetchUserInfo() {
+            try {
+                const response = await fetch('/api/user/me');
+                if (response.ok) {
+                    const user = await response.json();
+                    document.getElementById('userName').textContent = user.username;
+                    document.getElementById('userAvatar').src = user.avatar 
+                        ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`
+                        : 'https://cdn.discordapp.com/embed/avatars/0.png';
+                    document.getElementById('userInfo').style.display = 'flex';
+                    return user;
+                }
+            } catch (error) {
+                console.error('Хэрэглэгчийн мэдээлэл авахад алдаа:', error);
+            }
+            return null;
+        }
+        
+        // Сервер статус шалгах
+        async function checkServerStatus() {
+            const checkBtn = document.getElementById('checkBtn');
+            const statusDiv = document.getElementById('statusMessage');
+            
+            checkBtn.disabled = true;
+            checkBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Шалгаж байна...';
+            
+            try {
+                const response = await fetch('/api/user/server-status');
+                const data = await response.json();
+                
+                if (data.isInServer) {
+                    statusDiv.className = 'status-message success';
+                    statusDiv.innerHTML = `
+                        <i class="fas fa-check-circle"></i>
+                        <strong>Амжилттай!</strong> Та серверт нэгдсэн байна. Тоглоом руу шилжиж байна...
+                    `;
+                    
+                    // 2 секундын дараа тоглоом руу шилжүүлэх
+                    setTimeout(() => {
+                        const returnTo = sessionStorage.getItem('returnTo') || '/';
+                        window.location.href = returnTo;
+                    }, 2000);
+                } else {
+                    statusDiv.className = 'status-message error';
+                    statusDiv.innerHTML = `
+                        <i class="fas fa-exclamation-circle"></i>
+                        <strong>Анхаар!</strong> Та серверт нэгдээгүй байна. Эхлээд Discord серверт нэгдэж, дараа нь дахин шалгана уу.
+                    `;
+                    checkBtn.disabled = false;
+                    checkBtn.innerHTML = '<i class="fas fa-check-circle"></i> Серверт нэгдсэн эсэхээ шалгах';
+                }
+                
+                if (data.inviteLink) {
+                    document.getElementById('inviteLink').href = data.inviteLink;
+                }
+                
+            } catch (error) {
+                console.error('Status check error:', error);
+                statusDiv.className = 'status-message error';
+                statusDiv.innerHTML = `
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <strong>Алдаа!</strong> Сервертэй холбогдоход алдаа гарлаа. Дахин оролдоно уу.
+                `;
+                checkBtn.disabled = false;
+                checkBtn.innerHTML = '<i class="fas fa-check-circle"></i> Серверт нэгдсэн эсэхээ шалгах';
+            }
+        }
+        
+        // Хуудас ачааллахад
+        document.addEventListener('DOMContentLoaded', async () => {
+            await fetchUserInfo();
+            checkServerStatus();
+            
+            // Check товч
+            document.getElementById('checkBtn').addEventListener('click', checkServerStatus);
+            
+            // Socket events
+            socket.on('connect', () => {
+                console.log('Socket connected');
+            });
+        });
+        
+        // Session storage-д буцах хуудас хадгалах
+        const urlParams = new URLSearchParams(window.location.search);
+        const returnTo = urlParams.get('returnTo') || '/';
+        sessionStorage.setItem('returnTo', returnTo);
+    </script>
+</body>
+</html>

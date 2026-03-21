@@ -57,7 +57,7 @@ let discordClient = null;
 
 function setDiscordClient(client) {
   discordClient = client;
-  console.log('✅ Discord client вэб серверт холбогдлоо');
+
 }
 
 // ========== НЭВТРЭХ ЗААВАР ==========
@@ -158,7 +158,6 @@ app.get("/api/user/:userId", (req, res) => {
   try {
     // Ажлыг зөв авах - 'police' байх ёстой
     const job = discordClient.db.fetch(`job_${userId}`);
-    console.log(`Хэрэглэгч ${userId} - Ажил:`, job); // Лог нэмэх
     
     const userData = {
       money: discordClient.db.fetch(`money_${userId}`) || 0,
@@ -407,16 +406,16 @@ io.use((socket, next) => {
 });
 
 io.on('connection', (socket) => {
-  console.log('🟢 Вэб хэрэглэгч холбогдлоо:', socket.id);
   
+
   if (socket.user) {
-    console.log(`👤 Хэрэглэгч: ${socket.user.username} (${socket.user.id})`);
+
     socket.emit('authenticated', socket.user);
   }
   
   socket.on('authenticate', (userId) => {
     socket.userId = userId;
-    console.log(`👤 Хэрэглэгч баталгаажлаа: ${userId}`);
+
     
     if (discordClient) {
       const userData = {
@@ -470,9 +469,7 @@ io.on('connection', (socket) => {
     }
   });
   
-  socket.on('disconnect', () => {
-    console.log('🔴 Вэб хэрэглэгч саллаа:', socket.id);
-  });
+
 });
 
 // Рулет функц
@@ -480,6 +477,9 @@ function playRoulette(userId, bet, betType, betNumber, discordClient) {
   try {
     // Бооцоо хасах
     discordClient.db.subtract(`coin_${userId}`, bet);
+
+    const casinoTax = Math.floor(bet * 0.05);
+    discordClient.db.add(`casino_balance`, casinoTax);
     
     // Рулетны тоо (0-36)
     const winningNumber = Math.floor(Math.random() * 37);
@@ -489,28 +489,67 @@ function playRoulette(userId, bet, betType, betNumber, discordClient) {
     let multiplier = 0;
     let winAmount = 0;
     
+    // 🔥 ХЭЦҮҮ БОЛГОХ ӨӨРЧЛӨЛТҮҮД 🔥
+    // 1. Хар/Улаан, Тэгш/Сондгой-н үржүүлэгчийг бууруулах (2x -> 1.8x)
+    // 2. Тооны үржүүлэгчийг бууруулах (36x -> 30x)
+    // 3. Тоглогчийн бооцооны хэмжээнээс хамаарч амжилтын магадлалыг өөрчлөх
+    
+    const betSize = bet;
+    let difficultyMultiplier = 1;
+    
+    // Их бооцоотой бол хожих магадлалыг бууруулах
+    if (betSize > 500) {
+      difficultyMultiplier = 0.7;
+    } else if (betSize > 200) {
+      difficultyMultiplier = 0.85;
+    } else if (betSize > 100) {
+      difficultyMultiplier = 0.95;
+    }
+    
     if (betType === 'red' && isRed) {
-      win = true;
-      multiplier = 2;
+      // Улаан дээр бооцоо: магадлал бууруулах
+      const redChance = 0.45 * difficultyMultiplier; // 45% -> бага
+      if (Math.random() < redChance) {
+        win = true;
+        multiplier = 1.8; // 2x -> 1.8x
+      }
     } else if (betType === 'black' && !isRed && winningNumber !== 0) {
-      win = true;
-      multiplier = 2;
+      const blackChance = 0.45 * difficultyMultiplier;
+      if (Math.random() < blackChance) {
+        win = true;
+        multiplier = 1.8;
+      }
     } else if (betType === 'even' && winningNumber !== 0 && winningNumber % 2 === 0) {
-      win = true;
-      multiplier = 2;
+      const evenChance = 0.45 * difficultyMultiplier;
+      if (Math.random() < evenChance) {
+        win = true;
+        multiplier = 1.8;
+      }
     } else if (betType === 'odd' && winningNumber % 2 === 1) {
-      win = true;
-      multiplier = 2;
+      const oddChance = 0.45 * difficultyMultiplier;
+      if (Math.random() < oddChance) {
+        win = true;
+        multiplier = 1.8;
+      }
     } else if (betType === 'number' && betNumber === winningNumber) {
-      win = true;
-      multiplier = 36;
+      // Тооны бооцоо: магадлал бууруулах
+      const numberChance = (1/37) * difficultyMultiplier * 0.8; // ~2.16% -> ~1.73%
+      if (Math.random() < numberChance) {
+        win = true;
+        multiplier = 30; // 36x -> 30x
+      }
     }
     
     if (win) {
-      winAmount = bet * multiplier;
+      // Хожсон дүнг тооцоолох
+      let rawWinAmount = Math.floor(bet * multiplier);
+      
+      // Хожсон дүнгээс комисс хасах (3%)
+      const winTax = Math.floor(rawWinAmount * 0.03);
+      winAmount = rawWinAmount - winTax;
+      
+      // Зөвхөн НЭГ удаа нэмэх
       discordClient.db.add(`coin_${userId}`, winAmount);
-    } else {
-      winAmount = -bet;
     }
     
     const newCoins = discordClient.db.fetch(`coin_${userId}`) || 0;
@@ -527,7 +566,7 @@ function playRoulette(userId, bet, betType, betNumber, discordClient) {
       win: win,
       amount: Math.abs(winAmount),
       newCoins: newCoins,
-      message: win ? `🎉 ХОЖЛОО! +${winAmount} 🪙` : `😢 ХОЖИГДЛОО -${bet} 🪙`
+      message: win ? `🎉 ХОЖЛОО! +${winAmount} 🪙 (${multiplier}x)` : `😢 ХОЖИГДЛОО -${bet} 🪙`
     };
     
   } catch (error) {
@@ -1210,11 +1249,11 @@ app.get("/api/profile/:userId", async (req, res) => {
 function startServer() {
   server.listen(PORT, () => {
     console.log(`🌐 Вэб сервер ажиллаж байна: http://localhost:${PORT}`);
-    console.log(`🎮 Тоглоом: http://localhost:${PORT}/game`);
-    console.log(`🛒 Дэлгүүр: http://localhost:${PORT}/shop`);
-    console.log(`🏆 Лидерборд: http://localhost:${PORT}/leaderboard`);
-    console.log(`🎒 Агуулах: http://localhost:${PORT}/inventory`);
-    console.log(`🔐 Нэвтрэх: http://localhost:${PORT}/login`);
+    console.log(`🎮 Тоглоом: http://${discordClient.config.adress}:${PORT}/game`);
+    console.log(`🛒 Дэлгүүр: http://${discordClient.config.adress}:${PORT}/shop`);
+    console.log(`🏆 Лидерборд: http://${discordClient.config.adress}:${PORT}/leaderboard`);
+    console.log(`🎒 Агуулах: http://${discordClient.config.adress}:${PORT}/inventory`);
+    console.log(`🔐 Нэвтрэх: http://${discordClient.config.adress}:${PORT}/login`);
   });
 }
 

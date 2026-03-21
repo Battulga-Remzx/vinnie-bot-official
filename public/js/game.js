@@ -321,24 +321,37 @@ async function checkAllCooldowns() {
 
 // Рулет тоглох
 async function playRoulette() {
-    if (!window.currentUser) {
-        showNotification('❌ Эхлээд нэвтэрнэ үү!', 'error');
-        return;
-    }
-    
-    const bet = parseInt(document.getElementById('rouletteBet').value);
-    const currentCoins = parseInt(document.getElementById('coin').textContent.replace(/,/g, ''));
-    
-    if (isNaN(bet) || bet <= 0) {
-        showNotification('❌ Зөв бооцооны дүн оруулна уу!', 'error');
-        return;
-    }
-    
-    if (bet > currentCoins) {
-        showNotification(`❌ Хангалттай зоос байхгүй! Одоогийн зоос: ${currentCoins} 🪙`, 'error');
-        return;
-    }
-    
+  if (!window.currentUser) {
+    showNotification('❌ Эхлээд нэвтэрнэ үү!', 'error');
+    return;
+  }
+  
+  const bet = parseInt(document.getElementById('rouletteBet').value);
+  const currentCoins = parseInt(document.getElementById('coin').textContent.replace(/,/g, ''));
+  
+  if (isNaN(bet) || bet <= 0) {
+    showNotification('❌ Зөв бооцооны дүн оруулна уу!', 'error');
+    return;
+  }
+  
+  // 🔥 НЭМЭЛТ: Бооцооны дээд хязгаар
+  const MAX_BET = 500;
+  if (bet > MAX_BET) {
+    showNotification(`❌ Рулетка тоглоомонд хамгийн их бооцоо ${MAX_BET} 🪙 байна!`, 'error');
+    return;
+  }
+  
+  // 🔥 НЭМЭЛТ: Бооцооны доод хязгаар
+  const MIN_BET = 5;
+  if (bet < MIN_BET) {
+    showNotification(`❌ Рулетка тоглоомонд хамгийн бага бооцоо ${MIN_BET} 🪙 байна!`, 'error');
+    return;
+  }
+  
+  if (bet > currentCoins) {
+    showNotification(`❌ Хангалттай зоос байхгүй! Одоогийн зоос: ${currentCoins} 🪙`, 'error');
+    return;
+  }
     // Товчийг идэвхгүй болгох
     const spinBtn = document.getElementById('rouletteSpinBtn');
     spinBtn.disabled = true;

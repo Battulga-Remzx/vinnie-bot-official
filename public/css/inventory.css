@@ -227,3 +227,121 @@
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
+
+/* user-avatar img стиль */
+.user-avatar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #4ecca3;
+}
+
+/* user-info стиль */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(78, 204, 163, 0.3);
+}
+
+/* user-details */
+.user-details {
+    flex: 1;
+}
+
+.user-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #ffd369;
+    display: block;
+}
+
+.user-id {
+    font-size: 0.8rem;
+    color: #aaa;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 3px 8px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+/* user-menu dropdown */
+.user-menu {
+    position: relative;
+}
+
+.user-menu-btn {
+    background: transparent;
+    border: none;
+    color: #aaa;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: all 0.3s;
+}
+
+.user-menu-btn:hover {
+    color: #4ecca3;
+}
+
+.user-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #16213e;
+    border: 1px solid #4ecca3;
+    border-radius: 10px;
+    min-width: 150px;
+    display: none;
+    z-index: 1000;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.user-dropdown.show {
+    display: block;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.user-dropdown a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+.user-dropdown a:hover {
+    background: rgba(78, 204, 163, 0.2);
+    color: #4ecca3;
+}
+
+.user-dropdown a:last-child {
+    color: #ed4245;
+}
+
+.user-dropdown a:last-child:hover {
+    background: rgba(237, 66, 69, 0.2);
+    color: #ed4245;
+}
+
+.user-dropdown i {
+    width: 20px;
+}

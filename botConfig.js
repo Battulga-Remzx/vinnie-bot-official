@@ -1,6 +1,7 @@
 module.exports = {
   token: process.env.token,
   prefix: "!",
+  adress: '192.168.1.30',
   admins: [1443224124796436531], // Админ ID-нууд
   debug: false,
   
