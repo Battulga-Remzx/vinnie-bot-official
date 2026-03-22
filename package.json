@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "vercel-start": "node server.js",
+    "vercel-start": "mkdir -p public && cp -r public/* public/ || true",
     "dev": "nodemon index.js",
     "test": "node test.js"
   },
