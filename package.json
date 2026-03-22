@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "vercel-start": "node server.js",
     "dev": "nodemon index.js",
     "test": "node test.js"
   },

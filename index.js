@@ -77,8 +77,12 @@ const loadEvents = (dir) => {
     try {
       const event = require(path.join(dir, file));
       const eventName = file.split('.')[0];
-      client.on(eventName, (...args) => event(client, ...args));
-      console.log(`✅ Event ачааллаа: ${eventName}`);
+      
+      // v14-д ready эвэнт clientReady болсон
+      const actualEventName = eventName === 'ready' ? 'clientReady' : eventName;
+      
+      client.on(actualEventName, (...args) => event(client, ...args));
+      console.log(`✅ Event ачааллаа: ${eventName} -> ${actualEventName}`);
     } catch (error) {
       console.error(`❌ Event ачаалахад алдаа: ${file}`, error);
     }
@@ -91,7 +95,7 @@ loadEvents(path.join(__dirname, 'events'));
 const { updateCoinPrice } = require('./auto/coinprice');
 const { updateLeaderboard } = require('./auto/leaderboard');
 
-client.once('ready', () => {
+client.once('clientReady', () => {
   console.log(`${client.user.tag} онлайн боллоо!`);
   
   // Анхны coin үнэ тогтоох
@@ -120,6 +124,13 @@ client.once('ready', () => {
   } catch (error) {
     console.error('Сервер эхлүүлэхэд алдаа:', error);
   }
+});
+
+client.on('error', console.error);
+client.on('warn', console.warn);
+
+client.login(client.config.token).catch(err => {
+  console.error('❌ Бот нэвтрэхэд алдаа гарлаа:', err);
 });
 
 client.on('error', console.error);
