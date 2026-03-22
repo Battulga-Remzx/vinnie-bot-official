@@ -193,8 +193,98 @@
             </div>
         </main>
     </div>
-    
+
     <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/main.js"></script>
+<script src="/js/main.js"></script>
+<script>
+    // Хуудас ачаалахад нэвтрэлт болон сервер шалгах
+    document.addEventListener('DOMContentLoaded', async () => {
+        try {
+            // 1. Эхлээд нэвтрэлт шалгах
+            const authResponse = await fetch('/api/user/me', {
+                credentials: 'include'
+            });
+            
+            if (authResponse.status === 401) {
+                console.log('Нэвтрээгүй байна');
+                window.location.href = '/login';
+                return;
+            }
+            
+            if (!authResponse.ok) {
+                throw new Error('Хэрэглэгчийн мэдээлэл авахад алдаа');
+            }
+            
+            const user = await authResponse.json();
+            console.log('Нэвтэрсэн хэрэглэгч:', user.username);
+            window.currentUser = user.id;
+            
+            // Хэрэглэгчийн мэдээллийг харуулах
+            document.getElementById('userName').textContent = user.username;
+            document.getElementById('userId').textContent = user.id;
+            if (user.avatar) {
+                document.getElementById('userAvatar').src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
+            }
+            
+            // 2. Серверт нэгдсэн эсэхийг шалгах
+            const serverResponse = await fetch('/api/user/server-status', {
+                credentials: 'include'
+            });
+            const serverData = await serverResponse.json();
+            
+            console.log('Сервер шалгалт:', serverData);
+            
+            if (serverData.isInServer === true) {
+                // Серверт байна - контентыг харуулах
+                document.getElementById('authSection').style.display = 'none';
+                document.getElementById('userInfo').style.display = 'flex';
+            } else {
+                // Серверт байхгүй - join-server хуудас руу чиглүүлэх
+                console.log('Серверт байхгүй байна');
+                const currentPath = window.location.pathname;
+                window.location.href = `/join-server?returnTo=${encodeURIComponent(currentPath)}`;
+            }
+            
+        } catch (error) {
+            console.error('Алдаа:', error);
+            window.location.href = '/login';
+        }
+    });
+    
+    // Нэвтрэх товч
+    document.getElementById('loginBtn')?.addEventListener('click', () => {
+        window.location.href = '/auth/discord';
+    });
+    
+    // Гарах товч
+    document.getElementById('logoutBtn')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.location.href = '/logout';
+    });
+    
+    // Dropdown меню
+    (function() {
+        function setupDropdown() {
+            const menuBtn = document.getElementById('userMenuBtn');
+            const dropdown = document.getElementById('userDropdown');
+            
+            if (!menuBtn || !dropdown) {
+                setTimeout(setupDropdown, 500);
+                return;
+            }
+            
+            menuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                dropdown.classList.toggle('show');
+            });
+            
+            document.addEventListener('click', function() {
+                dropdown.classList.remove('show');
+            });
+        }
+        
+        setTimeout(setupDropdown, 500);
+    })();
+</script>
 </body>
 </html>

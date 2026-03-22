@@ -17,13 +17,13 @@
                 <h2>VINNIE BOT</h2>
             </div>
             
-            <!-- ✅ ЗӨВ: user-info -->
+            <!-- index.html - user-info хэсгийг доорх крор солино -->
             <div class="user-info" id="userInfo">
                 <div class="user-avatar">
-                    <img id="userAvatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid #4ecca3;">
+                    <img id="userAvatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%;">
                 </div>
                 <div class="user-details">
-                    <span class="user-name" id="userName">Ачааллаж байна...</span>
+                    <span class="user-name" id="userName">Зочны хэрэглэгч</span>
                     <span class="user-id" id="userId"></span>
                 </div>
                 <div class="user-menu">
@@ -31,7 +31,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </button>
                     <div class="user-dropdown" id="userDropdown">
-                        <a href="/profile"><i class="fas fa-user"></i> Профайл</a>
+                        <a href="/profile"><i class="fas fa-user"></i> Профайл</a>  <!-- Edit Account-ийг Profile-р сольсон -->
                         <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Гарах</a>
                     </div>
                 </div>
@@ -409,6 +409,7 @@
     
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/main.js"></script>
+    <script src="/js/server-check.js"></script>
     <script src="/js/game.js"></script>
 </body>
 </html>
