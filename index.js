@@ -139,3 +139,5 @@ client.on('warn', console.warn);
 client.login(client.config.token).catch(err => {
   console.error('❌ Бот нэвтрэхэд алдаа гарлаа:', err);
 });
+
+//v1
